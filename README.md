@@ -1,13 +1,22 @@
-# syllabify
-Automatically convert plain text into phonemes (US English pronunciation) and syllabify
 # Syllabify
+Automatically convert plain text into phonemes (US English pronunciation) and syllabify.
 
-Syllabify partitions phoneme strings into syllables by modelling the rules of syllable
-formation. The module implements Onset Maximalism and enforces the phonotactic rules of the English language. 
+Adapted from the repository set up by [Anthony Evans](https://github.com/anthonysgevans/syllabify) with some key changes, itemised below:
 
-Syllabify can be tested from the command line by executing **syllable.py**. It will transcribe, and
-return the syllable structure of 100 words chosen at random from a descriptive dictionary
-packaged with this project.
+* list
+* key
+* changes
+
+## Set up
+
+Requires [Python 3](https://www.python.org/downloads) (Anthony Evans originally used Python 2: if that's what you prefer, see his repo).
+
+## Usage
+
+```
+python3
+```
+
 
 
 ## About Syllables

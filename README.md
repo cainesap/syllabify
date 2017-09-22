@@ -6,7 +6,8 @@ Adapted from [the repository](https://github.com/anthonysgevans/syllabify) set u
 
 * Ported to Python 3 from Evans' Python 2 code;
 * Correction of key onset and coda rules which affect consonant clusters and involve the 'maximise onsets principle';
-* Removal of all ambisyllabicity from onset and coda rules, since it's not uncontroversial.
+* Removal of all ambisyllabicity from onset and coda rules, since it's not uncontroversial;
+* Removal of 'test' (demo) option from syllable script.
 
 Please see Anthony Evans' README file for a detailed background to the project.
 

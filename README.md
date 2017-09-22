@@ -25,9 +25,14 @@ One word at a time:
 python3 syllable3.py linguistics
 ```
 
-A [CHILDES](http://childes.talkbank.org) corpus, e.g. Brown:
+Or several (space-separated):
 ```
-python3 syllabify.py $CORPUSPATH
+python3 syllable3.py colourless green ideas
+```
+
+Or as preprocessing for the [wordseg](http://wordseg.readthedocs.io) program, `wordseg_prep' takes a [CHILDES](http://childes.talkbank.org) corpus (e.g. Brown) and syllabifies infant-directed speech (i.e. excluding CHI utterances) in phonemic format, with appropriate phone, syllable and word delimiters per wordseg defaults:
+```
+python3 wordseg_prep.py $CORPUSPATH
 ```
 
 

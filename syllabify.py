@@ -9,7 +9,7 @@ from nltk.corpus.reader import CHILDESCorpusReader
 #corpus_root = nltk.data.find('C:\\Users\\Emma\\AppData\\Roaming\\nltk_data\\corpora\\Brown')
 #brown = CHILDESCorpusReader(corpus_root, '.*\\.*.xml')
 # Andrew
-corpus_root = nltk.data.find('/Users/apcaines/Dropbox/workspace/Corpora/CHILDES/xml/BrownXML')
+corpus_root = nltk.data.find('/Users/apc38/Dropbox/workspace/Corpora/CHILDES/xml/BrownXML')
 brown = CHILDESCorpusReader(corpus_root, '.*/.*.xml')
 fileidlist = brown.fileids()
 
@@ -58,11 +58,13 @@ for fid in fileidlist:
                 wordcount+=1
                 ## syllabify
                 syllables = sy.generate(w)
-                try:
+                try:  # formatting per wordseg defaults: space between phones, ";esyll" between syllables, ";eword" between words
                     for syllable in syllables:
                         for syllable0 in syllable:
-                            stripped = re.sub('[a-z0-9{}\[\]:,\s]', '', str(syllable0))  # phones only, no stress markers
-                            syll = syll + ' ' + stripped  # add to syllabified string with space between syllables
+                            stripped = re.sub('[a-z0-9{}\[\]:,]', '', str(syllable0))  # phones only, no stress markers
+                            stripped = re.sub('\s{2,}', ' ', stripped)  # reduce multi-spaces to single space
+                            syll = syll + stripped + ';esyll'  # add to syllabified string with space between syllables
+                    syll = re.sub(';esyll$', ';eword', syll)  # replace final syllable delimiter with word delimiter
                 except:  # if no syllabification, skip
                     print("** Syllabification of", w, "not possible **")
                     errorcount+=1

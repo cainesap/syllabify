@@ -101,30 +101,31 @@ def factory(phoneme):
                 # the onset of the next syllable, unless the nuclear cluster is LIGHT and 
                 # has primary stress
                 maximal_coda, maximal_onset = onset_rules(cluster)
-            
-                if syllable.is_short() and syllable.get_stress() == '1' and not maximal_coda:
+                
+                ## AC 2017-09-15: removed ambisyllabicity as a theoretical stance
+                #if syllable.is_short() and syllable.get_stress() == '1' and not maximal_coda:
                     # The syllable is LIGHT and the consonat cluster is therefore ambisyllabic
                     # it belongs to both the current syllable and the next 
                     # coda is empty 
-                    light_coda = coda_rules(maximal_onset)
-                    syllable.set_coda(light_coda) 
-                    push(syllable)
-                    new_syllable = Syllable(onset = maximal_onset)
-                    push(new_syllable)
-                    return syllable_list
-                else:
+                #    light_coda = coda_rules(maximal_onset)
+                #    syllable.set_coda(light_coda) 
+                #    push(syllable)
+                #    new_syllable = Syllable(onset = maximal_onset)
+                #    push(new_syllable)
+                #    return syllable_list
+                #else:
                     # add cluster only to the next syllable
-                    if maximal_coda:
-                        syllable.set_coda(maximal_coda)
-                        push(syllable)
-                    else:
-                        push(syllable)
-                    if maximal_onset:
-                        new_syllable = Syllable(onset = maximal_onset)
-                    else:
-                        new_syllable = Syllable()
-                    push(new_syllable)
-                    return syllable_list  
+                if maximal_coda:
+                    syllable.set_coda(maximal_coda)
+                    push(syllable)
+                else:
+                    push(syllable)
+                if maximal_onset:
+                    new_syllable = Syllable(onset = maximal_onset)
+                else:
+                    new_syllable = Syllable()
+                push(new_syllable)
+                return syllable_list  
     
     def check_last_syllable(syllable_list):
         # the syllable algorithm may assign a consonant cluster to a syllable that does not have
@@ -268,56 +269,68 @@ def onset_rules(cluster):
         phonemes = phonemes[1:]
         return (phonemes, coda_cluster)
     
-    #rule 1 - /NG/ cannot exist in a valid onset
+    # rule 1 - /NG/ cannot exist in a valid onset
     # does /NG? exist? split on NG add NG to cod
+    # AC tests: 
     #if NG in ' '.join(phonemes):
     if NG in list_of_phonemes:
         #phonemes, coda_cluster = _split_and_update(NG)
         #print("onset rule 1")
         list_of_phonemes, coda_cluster = _remove_and_update('NG')  # AC 2017-08-12: corrected to remove_and_update; 2017-09-05: added speech marks to phoneme
     
-    #rule 2a - no affricates in complex onsets
+    # rule 2a - no affricates in complex onsets
     # /CH/ exist? split on affricate
+    # AC tests: 
     #if CH in ' '.join(phonemes):
     if CH in list_of_phonemes:
         #print("onset rule 2a")
         list_of_phonemes, coda_cluster = _split_and_update('CH')
     
-    #rule 2b - no affrictes in complex onsets
+    # rule 2b - no affrictes in complex onsets
     # /JH/ exist? split on affricate
-    #if JH in ' '.join(phonemes):
+    # AC tests: 
+    # if JH in ' '.join(phonemes):
     if JH in list_of_phonemes:
         #print("onset rule 2b")
         list_of_phonemes, coda_cluster = _split_and_update('JH')
     
-    #rule 3 - first consonant in a complex onset must be obstruent
+    # rule 3 - first consonant in a complex onset must be obstruent
     # if first consonant stop or fricative or nasal 
+    # AC tests: 
     #if len(list(phonemes)) > 1 and not phonemes[0] in [B,D,G,K,P,T,DH,F,S,SH,TH,V,ZH,M,N]:
     if len(list_of_phonemes) > 1 and not list_of_phonemes[0] in [B,D,G,K,P,T,DH,F,S,SH,TH,V,ZH,M,N]:
         #print("onset rule 3")
         list_of_phonemes, coda_cluster = _remove_and_update()
     
-    #rule 4 - second consonant in a complex onset must be a voiced obstruent
+    # rule 4 - second consonant in a complex onset must be a voiced obstruent
     # if not OBSTRUENT and VOICED? split on second consonant
+    # AC tests: describe (added check for 0=S), attract & playground (added 1=R), amused & therapeutic (added 1=Y)
     #if len(list(phonemes)) > 1 and not phonemes[1] in [B,M,V,D,N,Z,ZH]:
-    if len(list_of_phonemes) > 1 and not list_of_phonemes[1] in [B,M,V,D,N,Z,ZH]:
+    if len(list_of_phonemes) > 1 and not list_of_phonemes[0] == S and not list_of_phonemes[1] in [B,M,V,D,N,Z,ZH,R,Y]:
         #print("onset rule 4")
         list_of_phonemes, coda_cluster = _remove_and_update()
     
-    #rule 5 - if first consonant in a complex onset is not /s/
+    # rule 5 - if first consonant in a complex onset is not /s/
     # the second consonant must be liquid or glide /L/ /R/ /W/ /Y/
+    # AC tests: 
     #if len(list(phonemes)) > 1 and not phonemes[0] == S and not phonemes[1] in [L,R,W,Y]:
     if len(list_of_phonemes) > 1 and not list_of_phonemes[0] == S and not list_of_phonemes[1] in [L,R,W,Y] and len(list_of_phonemes) < 3:
-        print("onset rule 5")
+        #print("onset rule 5")
         list_of_phonemes, coda_cluster = _remove_and_update()
 
-    #rule 6 - deal with NDR and NDL clusters
-    if len(list_of_phonemes) > 2 and list_of_phonemes[0] == N and list_of_phonemes[1] == D:
-        print("onset rule 6")
-        if list_of_phonemes[2] == R:
-            list_of_phonemes, coda_cluster = _split_and_update('D')
-        elif list_of_phonemes[2] == L:
-            list_of_phonemes, coda_cluster = _split_and_update('L')
+    # rule 6 - deal with N|DR, ND|L, T|BR clusters
+    # AC tests: endless, undress, heartbreak, grandmother, toothbrush, handbag, handling
+    if len(list_of_phonemes) > 2 and list_of_phonemes[0] in ['N', 'T', 'TH'] and list_of_phonemes[1] in ['D', 'B']:
+        #print("onset rule 6")
+        if list_of_phonemes[0] in ['R', 'T'] and list_of_phonemes[1] in ['B'] and list_of_phonemes[2] in ['R']:  # heartbreak
+            list_of_phonemes, coda_cluster = _split_and_update(list_of_phonemes[0])
+        elif list_of_phonemes[0] in ['TH']:  # toothbrush
+            list_of_phonemes, coda_cluster = _split_and_update(list_of_phonemes[1])
+        elif list_of_phonemes[0] in ['N'] or list_of_phonemes[2] in ['L', 'M']:
+            if list_of_phonemes[1] in ['D'] and list_of_phonemes[2] in ['R']:  # undress
+                list_of_phonemes, coda_cluster = _split_and_update(list_of_phonemes[1])
+            else:  # endless, handbag
+                list_of_phonemes, coda_cluster = _split_and_update(list_of_phonemes[2])
     
     if coda_cluster.get_phoneme() == []:
         coda_cluster = None

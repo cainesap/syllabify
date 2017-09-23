@@ -16,7 +16,7 @@ Please see Anthony Evans' README file for a detailed background to the project.
 
 Requires [Python 3](https://www.python.org/downloads) (Anthony Evans used Python 2: if that's what you prefer, see his repo).
 
-Refers to the [CMU Pronouncing Dictionary](http://www.speech.cs.cmu.edu/cgi-bin/cmudict) of North American English word pronunciations. Version 0.7b was the current one at time of writing, but it throws a UnicodeDecodeError, so we're still using version 0.7a (amended to remove erroneous 'G' from SUGGEST and related words). Please see the dictionary download website to obtain the current version, add the `cmudict-N.nx(.phones|.symbols)*` files to the `CMU_dictionary` directory, remove the '.txt' suffixes, and update the line `VERSION = 'cmudict-n.nx'` in `cmuparser3.py`
+Clone or download this repo and you're good to go!
 
 
 ## Usage
@@ -46,6 +46,11 @@ If the input word is found in the dictionary, a phonemic, syllabified transcript
 {o: S T , n: IH [st:0 ln:short], c: K S }
 ```
 There's one syllable per line. Each syllable is made up of an 'o' onset, 'n' nucleus, and 'c' coda. Phonemes are space-separated and capitalized in [ARPAbet](https://en.wikipedia.org/wiki/ARPABET) format. In line with phonological theory, the nucleus must have content, whereas the onset and coda may be empty. Within the vocalic content of the nucleus there's also an indication whether the syllable is stressed ('st':0 or 1), and whether the length ('ln') is short or long.
+
+
+## CMU Pronouncing Dictionary
+
+`Syllabify` depends on the [CMU Pronouncing Dictionary](http://www.speech.cs.cmu.edu/cgi-bin/cmudict) of North American English word pronunciations. Version 0.7b was the current one at time of writing, but it throws a UnicodeDecodeError, so we're still using version 0.7a (amended to remove erroneous 'G' from SUGGEST and related words). Please see the dictionary download website to obtain the current version, add the `cmudict-N.nx(.phones|.symbols)*` files to the `CMU_dictionary` directory, remove the '.txt' suffixes, and update the line `VERSION = 'cmudict-n.nx'` in `cmuparser3.py`
 
 
 ## To do

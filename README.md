@@ -37,22 +37,19 @@ python3 wordseg_prep.py $CORPUSPATH
 ```
 
 
-## Rules
-
-1. If an onset contains a cluster of three consonants, the first consonant must be /S/.
-2. /NG/ cannot appear in an onset
-3. /V DH Z ZH/ cannot form part of onset clusters
-4. /T D TH/ adjoined with /L/ cannot form an onset cluster
-5. /H/ cannot appear in a coda
-6. /LG/ is not a permissible coda cluster
-
-Onset Maximalism ”Where there is a choice always assign as many consonants as
-possible to the onset, and as few as possible to the coda. However, remember that
-every word must also consist of a sequence of well formed syllables ”
-
-
 ## Output
 
-For each transcribed word, the CMU dictionary returns a phoneme string that is not
-partitioned into syllables. If we are to create a system that can compare phonological
-units we will need to model the rules of syllabification.
+If the input word is found in the dictionary, a phonemic, syllabified transcript is returned. For example, for the word _linguistics_:
+```
+{o: L , n: IH [st:0 ln:short], c: NG }
+{o: G W , n: IH [st:1 ln:short], c: empty}
+{o: S T , n: IH [st:0 ln:short], c: K S }
+```
+There's one syllable per line. Each syllable is made up of an 'o' onset, 'n' nucleus, and 'c' coda. Phonemes are space-separated and capitalized in [ARPAbet](https://en.wikipedia.org/wiki/ARPABET) format. In line with phonological theory, the nucleus must have content, whereas the onset and coda may be empty. Within the vocalic content of the nucleus there's also an indication whether the syllable is stressed ('st':0 or 1), and whether the length ('ln') is short or long.
+
+
+## Contact
+
+If you have queries or feedback please contact `apc38` at `cam.ac.uk`
+
+_Andrew Caines, September 2017_

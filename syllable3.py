@@ -197,15 +197,15 @@ def coda_rules(cluster):
         
         return (phonemes, coda_cluster)
     
-    #rule 1 - no /HH/ is coda
+    #rule 1 - no /HH/ in coda
     if HH in list_of_phonemes:
         list_of_phonemes, coda_cluster = _split_and_update('HH')
     
     #rule 2 - no glides in coda
-    #if L in list_of_phonemes:
+    #if L in list_of_phonemes:  # commented out by AC
         #list_of_phonemes, coda_cluster = _split_and_update('L')
     
-    #if R in list_of_phonemes:
+    #if R in list_of_phonemes:  # commented out by AC
         #list_of_phonemes, coda_cluster = _split_and_update('R')
     
     if W in list_of_phonemes:
@@ -271,7 +271,7 @@ def onset_rules(cluster):
     
     # rule 1 - /NG/ cannot exist in a valid onset
     # does /NG? exist? split on NG add NG to cod
-    # AC tests: 
+    # AC tests: ringing
     #if NG in ' '.join(phonemes):
     if NG in list_of_phonemes:
         #phonemes, coda_cluster = _split_and_update(NG)
@@ -286,7 +286,7 @@ def onset_rules(cluster):
         #print("onset rule 2a")
         list_of_phonemes, coda_cluster = _split_and_update('CH')
     
-    # rule 2b - no affrictes in complex onsets
+    # rule 2b - no affricates in complex onsets
     # /JH/ exist? split on affricate
     # AC tests: 
     # if JH in ' '.join(phonemes):

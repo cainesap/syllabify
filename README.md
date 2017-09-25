@@ -45,7 +45,7 @@ If the input word is found in the dictionary, a phonemic, syllabified transcript
 {o: G W , n: IH [st:1 ln:short], c: empty}
 {o: S T , n: IH [st:0 ln:short], c: K S }
 ```
-There's one syllable per line. Each syllable is made up of an 'o' onset, 'n' nucleus, and 'c' coda. Phonemes are space-separated and capitalized in [ARPAbet](https://en.wikipedia.org/wiki/ARPABET) format. In line with phonological theory, the nucleus must have content, whereas the onset and coda may be empty. Within the vocalic content of the nucleus there's also an indication whether the syllable is stressed ('st':0 or 1), and whether the length ('ln') is short or long.
+There's one syllable per line. Each syllable is made up of an 'o' onset, 'n' nucleus, and 'c' coda. Phonemes are space-separated and capitalized in [ARPAbet](http://en.wikipedia.org/wiki/ARPABET) format. In line with phonological theory, the nucleus must have content, whereas the onset and coda may be empty. Within the vocalic content of the nucleus there's also an indication whether the syllable is stressed ('st':0 or 1), and whether the length ('ln') is short or long.
 
 
 ## CMU Pronouncing Dictionary
@@ -55,11 +55,11 @@ There's one syllable per line. Each syllable is made up of an 'o' onset, 'n' nuc
 
 ## To do
 
-Offer the option to 'translate' US to UK pronunciations; for instance dealing with lack of rhoticity by converting AXR and ER phones to UK equivalents (I know, _which_ UK! Cross that bridge etc..)
+Offer the option to 'translate' US to UK pronunciations; for instance dealing with lack of rhoticity by converting AXR and ER phones to UK equivalents (I know, _which_ UK variety!? Cross that bridge etc..)
 
 
 ## Contact
 
-If you have queries or feedback please contact `apc38` at `cam.ac.uk`
+If you have queries or feedback please contact `cainesap` at `gmail.com`
 
 _Andrew Caines, September 2017_
